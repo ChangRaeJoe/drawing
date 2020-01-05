@@ -19,23 +19,30 @@ const status = {
     drawing: false
 };
 
+function initDrawingState(){
+    ctx.strokeStyle = 'white';
+    ctx.fillStyle = 'white';
+    ctx.lineWidth = 2.5;
+
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.filter = 'blur(0px)';
+}
+
 function initCanvas(){
     canvas.width = CANVAS_SIZE;
     canvas.height = CANVAS_SIZE;
 
-    ctx.fillStyle = "white";
+    initDrawingState();
     ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-
+    
     ctx.strokeStyle = INIT_COLOR;
     ctx.fillStyle = INIT_COLOR;
-    ctx.lineWidth = 2.5;
-
-    
 }
 
 function startBrushing(){
     status.brushing = true;
-    ctx.filter = 'blur(2.5px)';  
+    ctx.filter = 'blur(3px)';  
 }
 function stopBrushing(){
     status.brushing = false;
@@ -57,25 +64,31 @@ function stopFilling(){
 function stopDrawing(){
     status.drawing = false;
 }
-function startDrawing(){
+function startDrawing(e){
     status.drawing = true;
+    onMouseMove(e);
 }
 
 function onMouseMove(e){
     const x = e.offsetX;
     const y = e.offsetY;
     if(status.drawing){
+        if(status.brushing){
+
+        }
+        else if(status.filling){
+
+        }
+        
         ctx.lineTo(x,y);
         ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
     }
     else{
         ctx.beginPath();
-        ctx.moveTo(x, y); 
+        ctx.moveTo(x, y);
     }
-}
-
-function onMouseDown(e){
-    status.drawing = true;
 }
 
 function changeColor(e){
@@ -108,11 +121,10 @@ function handleSave(e){
 }
 
 function handleClear(e){
-    const preFillStyle = ctx.fillStyle;
-    ctx.fillStyle = "white";
+    ctx.save();
+    initDrawingState();
     ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-
-    ctx.fillStyle = preFillStyle;
+    ctx.restore();
 }
 
 function handleMode(event){
@@ -182,4 +194,3 @@ if(clear)
 {
     clear.addEventListener('click', handleClear);
 }
-
