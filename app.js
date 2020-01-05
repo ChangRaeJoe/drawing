@@ -19,19 +19,25 @@ const status = {
     drawing: false
 };
 
-function initCanvas(){
-    canvas.width = CANVAS_SIZE;
-    canvas.height = CANVAS_SIZE;
-
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-
-    ctx.strokeStyle = INIT_COLOR;
-    ctx.fillStyle = INIT_COLOR;
+function initDrawingState(){
+    ctx.strokeStyle = 'white';
+    ctx.fillStyle = 'white';
     ctx.lineWidth = 2.5;
 
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
+    ctx.filter = 'blur(0px)';
+}
+
+function initCanvas(){
+    canvas.width = CANVAS_SIZE;
+    canvas.height = CANVAS_SIZE;
+
+    initDrawingState();
+    ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    
+    ctx.strokeStyle = INIT_COLOR;
+    ctx.fillStyle = INIT_COLOR;
 }
 
 function startBrushing(){
@@ -115,11 +121,10 @@ function handleSave(e){
 }
 
 function handleClear(e){
-    const preFillStyle = ctx.fillStyle;
-    ctx.fillStyle = "white";
+    ctx.save();
+    initDrawingState();
     ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-
-    ctx.fillStyle = preFillStyle;
+    ctx.restore();
 }
 
 function handleMode(event){
