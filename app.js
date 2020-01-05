@@ -30,12 +30,13 @@ function initCanvas(){
     ctx.fillStyle = INIT_COLOR;
     ctx.lineWidth = 2.5;
 
-    
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
 }
 
 function startBrushing(){
     status.brushing = true;
-    ctx.filter = 'blur(2.5px)';  
+    ctx.filter = 'blur(3px)';  
 }
 function stopBrushing(){
     status.brushing = false;
@@ -57,25 +58,31 @@ function stopFilling(){
 function stopDrawing(){
     status.drawing = false;
 }
-function startDrawing(){
+function startDrawing(e){
     status.drawing = true;
+    onMouseMove(e);
 }
 
 function onMouseMove(e){
     const x = e.offsetX;
     const y = e.offsetY;
     if(status.drawing){
+        if(status.brushing){
+
+        }
+        else if(status.filling){
+
+        }
+        
         ctx.lineTo(x,y);
         ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
     }
     else{
         ctx.beginPath();
-        ctx.moveTo(x, y); 
+        ctx.moveTo(x, y);
     }
-}
-
-function onMouseDown(e){
-    status.drawing = true;
 }
 
 function changeColor(e){
@@ -182,4 +189,3 @@ if(clear)
 {
     clear.addEventListener('click', handleClear);
 }
-
