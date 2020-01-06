@@ -1,0 +1,34 @@
+.tableAlignLeft{
+    /* text-align: left; */
+}
+.tableLine{
+    border-bottom: black 1px solid;
+    margin: 5px;
+}
+.tableBg{
+    background-color: silver;
+}
+.tableMargin{
+    padding: 3px 20px;
+}
+.btnRight{
+    text-align: right;
+}
+.boardSize{
+    width: 550px;
+}
+.btnMagin{
+    margin-top: 5px;
+}
+.btnMaginSide{
+    margin: 0 2px;
+}
+.btnCenter{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.tableHead{
+    padding-bottom: 4px;
+    font-weight: 700;
+}
