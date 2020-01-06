@@ -68,7 +68,7 @@ nav ul li{
     color: honeydew;
 
     display: flex;
-
+    z-index: 999;
 }
 .fixedHead nav{
     flex-grow: 1;
@@ -84,7 +84,8 @@ nav ul li{
     height: 35px;
     background-color:#a5c9ff;
 
-    justify-content: flex-end;       
+    justify-content: flex-end;
+    z-index: 999; 
 }
 
 a:link, a:visited, a:hover, a:active{
