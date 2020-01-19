@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,10 +23,12 @@
         </div>
         <div class="fixedHead under">
             <form action="">
-                <input type="text" placeholder="id">
-                <input type="password" placeholder="password">
-                <button>로그인</button>
-                <button>회원가입</button>
+                <input type="text" placeholder="id" id='id'>
+
+                <input type="password" placeholder="password" id='password'>
+                                
+                <button class="loginBtn" >Login</button>
+                <button class="loginBtn">Sign Up</button> 
             </form>
         </div>
         
@@ -34,15 +36,19 @@
             
             <main>
                 <div class='boardSize'>
+                    <h2>Talk Board</h2>
                     <table class=" ">
-                        <tr class="tableLine ">
-                            <th class="tableHead ">번호</th>
-                            <th class="tableHead ">제목</th>
-                            <th class="tableHead ">작성자</th>
-                            <th class="tableHead ">날짜</th>
-                            <th class="tableHead ">조회수</th>
-                            <th class="tableHead ">좋아요</th>
-                        </tr>        
+                        <thead>
+                            <tr class="tableLine ">
+                                <th class="tableHead ">번호</th>
+                                <th class="tableHead ">제목</th>
+                                <th class="tableHead ">작성자</th>
+                                <th class="tableHead ">날짜</th>
+                                <th class="tableHead ">조회수</th>
+                                <th class="tableHead ">좋아요</th>
+                            </tr> 
+                        </thead>
+                               
                         <tr class="tableLine tableBg">
                             <td class="tableMargin">1</td>
                             <td class="tableMargin">noticeaaaaaaaaaaaaa</td>
@@ -59,67 +65,17 @@
                             <td class="tableMargin">5</td>
                             <td class="tableMargin">12</td>
                         </tr>
-                        <tr class="tableLine">
-                            <td class="tableMargin">2</td>
-                            <td class="tableMargin">hello world</td>
-                            <td class="tableMargin">apple123</td>
-                            <td class="tableMargin">2020/1/1</td>
-                            <td class="tableMargin">5</td>
-                            <td class="tableMargin">12</td>
-                        </tr>
-                        <tr class="tableLine">
-                            <td class="tableMargin">2</td>
-                            <td class="tableMargin">hello world</td>
-                            <td class="tableMargin">apple123</td>
-                            <td class="tableMargin">2020/1/1</td>
-                            <td class="tableMargin">5</td>
-                            <td class="tableMargin">12</td>
-                        </tr>
-                        <tr class="tableLine">
-                            <td class="tableMargin">2</td>
-                            <td class="tableMargin">hello world</td>
-                            <td class="tableMargin">apple123</td>
-                            <td class="tableMargin">2020/1/1</td>
-                            <td class="tableMargin">5</td>
-                            <td class="tableMargin">12</td>
-                        </tr>
-                        <tr class="tableLine">
-                            <td class="tableMargin">2</td>
-                            <td class="tableMargin">hello world</td>
-                            <td class="tableMargin">apple123</td>
-                            <td class="tableMargin">2020/1/1</td>
-                            <td class="tableMargin">5</td>
-                            <td class="tableMargin">12</td>
-                        </tr>
-                        <tr class="tableLine">
-                            <td class="tableMargin">2</td>
-                            <td class="tableMargin">hello world</td>
-                            <td class="tableMargin">apple123</td>
-                            <td class="tableMargin">2020/1/1</td>
-                            <td class="tableMargin">5</td>
-                            <td class="tableMargin">12</td>
-                        </tr>
-                        <tr class="tableLine">
-                            <td class="tableMargin">2</td>
-                            <td class="tableMargin">hello world</td>
-                            <td class="tableMargin">apple123</td>
-                            <td class="tableMargin">2020/1/1</td>
-                            <td class="tableMargin">5</td>
-                            <td class="tableMargin">12</td>
-                        </tr>
-                        <tr class="tableLine">
-                            <td class="tableMargin">2</td>
-                            <td class="tableMargin">hello world</td>
-                            <td class="tableMargin">apple123</td>
-                            <td class="tableMargin">2020/1/1</td>
-                            <td class="tableMargin">5</td>
-                            <td class="tableMargin">12</td>
-                        </tr>
                     </table>
+<<<<<<< HEAD
+=======
+
+>>>>>>> f61707f65e882f751c77e058cf5530edc2425b84
                     <div class="btnRight btnMagin">
                         <button>
                         글쓰기
-                    </button></div>
+                        </button>
+                    </div>
+
                     <div class="page btnCenter">
                         <button class="btnMaginSide">1</button>
                         <button class="btnMaginSide">1</button>

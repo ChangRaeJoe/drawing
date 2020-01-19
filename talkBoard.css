@@ -1,3 +1,9 @@
+h2{
+    font-size: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
 .tableAlignLeft{
     /* text-align: left; */
 }
@@ -16,6 +22,7 @@
 }
 .boardSize{
     width: 550px;
+    margin:auto;
 }
 .btnMagin{
     width: 100%;
