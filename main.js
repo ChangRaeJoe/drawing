@@ -1,7 +1,7 @@
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
-
+const path = require('path');
 const dbconfig = require('./dbconfig'); 
 
 dbconfig.handleDisconnect();
@@ -22,20 +22,21 @@ const app = http.createServer(function(request, response){
 
    console.log('queryData:', queryData);
    console.log('pathname:', pathname);
+
    if(pathname === '/' || pathname === '/index.html')
    {
         response.writeHead(200);
-        response.end(fs.readFileSync(__dirname + '/index.html'));
+        response.end(fs.readFileSync(__dirname + '/public/index.html'));
    }
    else if(pathname === '/about.html')
    {
         response.writeHead(200);
-        response.end(fs.readFileSync(__dirname + '/about.html'));
+        response.end(fs.readFileSync(__dirname + '/public/about.html'));
    }
    else if(pathname === '/board.html')
    {
         response.writeHead(200);
-        response.end(fs.readFileSync(__dirname + '/board.html'));
+        response.end(fs.readFileSync(__dirname + '/public/board.html'));
    }
    else if(pathname === '/update_board.html')
    {
@@ -48,7 +49,7 @@ const app = http.createServer(function(request, response){
    else if(pathname === '/talk.html')
    {
         response.writeHead(200);
-        response.end(fs.readFileSync(__dirname + '/talk.html'));
+        response.end(fs.readFileSync(__dirname + '/public/talk.html'));
    }
    else if(pathname === '/update_talk.html')
    {
@@ -58,22 +59,28 @@ const app = http.createServer(function(request, response){
    {
        
    }
-   //css, js
-   else if(pathname === '/style.css')
+   else if(pathname === '/createDraw.html')
    {
-        response.writeHead(200, {'Content-Type': 'text/css'});
-        response.end(fs.readFileSync(__dirname + '/style.css'));
+     response.writeHead(200);
+     response.end(fs.readFileSync(__dirname + '/public/createDraw.html'));
    }
-   else if(pathname === '/mainLayout.css')
+   //static file: css, js, img
+   else if(path.extname(pathname) === '.css')
    {
-        response.writeHead(200, {'Content-Type': 'text/css'});
-        response.end(fs.readFileSync(__dirname + '/mainLayout.css'));
+     response.writeHead(200, {'Content-Type': 'text/css'});
+     response.end(fs.readFileSync(`${__dirname}/public/css${pathname}`));
    }
-   else if(pathname === '/reset.css')
+   else if(path.extname(pathname) === '.js')
    {
-        response.writeHead(200, {'Content-Type': 'text/css'});
-        response.end(fs.readFileSync(__dirname + '/reset.css'));
+     response.writeHead(200, {'Content-Type': 'text/js'});
+     response.end(fs.readFileSync(`${__dirname}/public/js${pathname}`));
    }
+   else if(path.dirname(pathname) === '/public/img')
+   {
+     response.writeHead(200, {'Content-Type': 'text/img'});
+     response.end(fs.readFileSync(__dirname + pathname));
+   }
+   //404: not found
    else
    {
        response.writeHead(404);
