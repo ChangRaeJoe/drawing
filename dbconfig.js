@@ -1,32 +1,43 @@
 const mysql = require('mysql');
 const db_config = require('./db.js');     //db.js==dbTemplete.js
 
-let connection;
+function dbWrapper()
+{
+    let dbConnection = undefined;
 
-const handleDisconnect = function () {
+    function handleDisconnect() {
+        dbConnection = mysql.createConnection(db_config);
 
-    connection = mysql.createConnection(db_config); // Recreate the connection, since
-                                                    // the old one cannot be reused.
-    connection.connect(function(err) {              // The server is either down
-        if(err) {                                     // or restarting (takes a while sometimes).
-        console.log('error when connecting to db:', err);
-        setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
-        }                                     // to avoid a hot loop, and to allow our node script to
-    });                                     // process asynchronous requests in the meantime.
-                                            // If you're also serving http, display a 503 error.
-    connection.on('error', function(err) {
-        console.log('db error', err);
-        if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
-        handleDisconnect();                         // lost due to either server restart, or a
-        } else {                                      // connnection idle timeout (the wait_timeout
-        throw err;                                  // server variable configures this)
-        }
-    });
+        dbConnection.connect(function(err) {
+            if(err) {
+                console.log('error when connecting to db:', err);
+                setTimeout(handleDisconnect, 2000);
+            }
+        });
 
-    //log파일은 어떻게 만들어서 처리하지?이렇게하나;
-    console.log('log: DB connect');
+        dbConnection.on('error', function(err) {
+            console.log('db error', err);
+            if(err.code === 'PROTOCOL_CONNECTION_LOST') {
+                setTimeout(handleDisconnect, 2000);
+            } else {
+                throw err;
+            }
+        });
+    
+        //log파일은 어떻게 만들어서 처리하지?이렇게하나;
+        console.log('log: DB connect');
+    }
+
+    function getConnect(){
+        return dbConnection;
+    }
+    return {
+        handleDisconnect : handleDisconnect,
+        getConnect : getConnect
+    };
 }
-// handleDisconnect(); 
 
-//exports.connection = connection;
-exports.handleDisconnect = handleDisconnect;
+module.exports = dbWrapper();
+
+// call by reference, value가 js에선 어찌 쓰이나?
+// 아.. defined있는 걸 return해주네.
