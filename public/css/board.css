@@ -1,0 +1,35 @@
+
+/* a board size */
+.imgConfig{
+    width:200px;
+    height: 200px;
+    transition: all .5s;
+}
+.imgConfig:hover{
+    transform: scale(1.2);
+    transition: all .5s;
+}
+.imgLimit{
+    overflow: hidden;
+}
+.boxSize{
+    width:200px;
+    height: 270px;
+    border-radius: 6px;
+    background-color: whitesmoke;
+    
+    
+    overflow: hidden;
+    margin: 8px;
+}
+.boardContainer{
+    width:1000px;
+    display: flex;
+    direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.widthFull{
+    width: 100%;
+    padding: 3px;
+}
