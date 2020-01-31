@@ -2,8 +2,13 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 const path = require('path');
+const querystring = require('querystring');
+
 const dbconfig = require('./dbconfig'); 
 const template = require('./lib/template');
+const create = require('./lib/create');
+
+
 dbconfig.handleDisconnect();
 
 
@@ -17,47 +22,28 @@ const app = http.createServer(function(request, response){
     */
    /*
      ToDo: http -> https(ssl)
-     ToDo: 템플릿으로 html코드생성, 회원가입생성
+     ToDo: 템플릿으로 html코드생성, 회원가입생성, 비번암호화(mysql, server, brower, 전송방식선택)
      ToDo: mysql설치설정, 노드설치설정, 서버프로그램들을 배포를 위한 서버로 옮겨야함. 이것들을 간편히 하려면?
    */
    let _url = request.url;
    let queryData = url.parse(_url, true).query;
    let pathname = url.parse(_url, true).pathname;
    
-
    console.log('queryData:', queryData);
    console.log('pathname:', pathname);
 
    if(pathname === '/' || pathname === '/index.html')
    {
-      const css = template.CSS(['style', 'mainLayout', 'loginRes']);
-      const script = template.SCRIPT(['login']);
-      const home = template.html('share Drawing', 'main', 'aside', css, script);
-      response.writeHead(200, {'Content-Type': 'text/html'});
-
-      response.end(home);
+      create.index(request, response);
 
    }
    else if(pathname === '/about.html')
    {
-        const css = template.CSS(['style', 'mainLayout', 'loginRes', 'about']);
-        const script = template.SCRIPT(['login']);
-        const main = fs.readFileSync(__dirname + '/public/aboutMain.html');
-        const about = template.html('share Drawing-about', main, 'aside', css, script);
-        response.writeHead(200, {'Content-Type': 'text/html'});
-        response.end(about);
+      create.about(request, response);
    }
    else if(pathname === '/board.html')
    {
-        const css = template.CSS(['style', 'mainLayout', 'loginRes', 'talkBoard', 'board']);
-        const script = template.SCRIPT(['login']);
-        const main = fs.readFileSync(__dirname + '/public/boardMain.html');
-
-        const board = template.html('share Drawing-Board', main, 'aside', css, script);
-
-        response.writeHead(200, {'Content-Type': 'text/html'});
-        response.end(board);
-
+      create.board(request, response);
    }
    else if(pathname === '/update_board.html')
    {
@@ -69,14 +55,7 @@ const app = http.createServer(function(request, response){
    }
    else if(pathname === '/talk.html')
    {
-        const css = template.CSS(['style', 'mainLayout', 'loginRes', 'talkBoard']);
-        const script = template.SCRIPT(['login']);
-        const main = fs.readFileSync(__dirname + '/public/talkMain.html');
-
-        const talkBoard = template.html('share Drawing-talkBoard', main, 'aside', css, script);
-
-        response.writeHead(200, {'Content-Type': 'text/html'});
-        response.end(talkBoard);
+      create.talk(request, response);
    }
    else if(pathname === '/update_talk.html')
    {
@@ -88,14 +67,15 @@ const app = http.createServer(function(request, response){
    }
    else if(pathname === '/createDraw.html')
    {
-        const css = template.CSS(['style', 'mainLayout', 'loginRes']);
-        const script = template.SCRIPT(['canvasDraw', 'login']);
-        const main = fs.readFileSync(__dirname + '/public/createDrawMain.html');
-
-        const createDraw = template.html('share Drawing-createDraw', main, 'aside', css, script);
-
-        response.writeHead(200, {'Content-Type': 'text/html'});
-        response.end(createDraw);
+      create.createDraw(request, response);
+   }
+   else if(pathname === '/login/register')
+   {
+      create.getRegister(request, response, db);
+   }
+   else if(pathname === '/login/login')
+   {
+      create.getLogin(request, response, db);
    }
    //static file: css, js, img
    else if(path.extname(pathname) === '.css')

@@ -37,14 +37,18 @@
 }
 .signUp input{
    width:150px;
+   height:20px;
 }
-.signUp #useremail{
+/* toChange: email select+input */
+/* .signUp #useremail{
    width:80px;
-}
+} 
 .signUp select{
    width: 70px;
    margin-left: 8px;
 }
+*/
+
 .signUp button{
    height: 28px;
    background-color: #2c2c2c;

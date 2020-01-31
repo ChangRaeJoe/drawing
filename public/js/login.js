@@ -1,16 +1,19 @@
 const displayRegister = document.querySelector('.displayRegister');
 const jsSignUp = document.querySelector('#jsSignUp');
-const backSignUp = document.querySelector('.backSignUp');
-
+const cancel = document.querySelector('.jsCancel');
+const inputs = document.querySelectorAll('input');
 function handleDisplay(event)
 {
     event.preventDefault();
     displayRegister.classList.toggle('displayRegisterOff');
 }
 
-function handleEmptyClick(event)
+function handleCancel(event)
 {
     displayRegister.classList.toggle('displayRegisterOff');
+    inputs.forEach(function(item){
+        item.value = "";
+    });
 }
 jsSignUp.addEventListener('click', handleDisplay);
-backSignUp.addEventListener('click', handleEmptyClick);
+cancel.addEventListener('click', handleCancel);
