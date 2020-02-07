@@ -81,3 +81,11 @@ hr{
    
    margin: 10px;
 }
+
+/* 비활성화 */
+.jsIdDup:disabled,
+.jsNickDup:disabled,
+.jsEmailDup:disabled{
+   background: #dddddd;
+   cursor: default;
+ }
