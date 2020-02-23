@@ -1,0 +1,38 @@
+<form action="/login/register" method="post">
+    <table>
+        <tbody>
+            <tr>
+                <td><label for="userid">아이디</label></td>
+                <td><input type="text" id="userid" name="uid"  required /></td>   
+                <td><button class='jsIdDup'>중복확인</button></td>                     
+            </tr>
+            <tr>
+                <td><label for="password">비밀번호</label></td>
+                <td><input type="password" id="password" name="upwd"  required/></td>
+                <td></td>                        
+            </tr>
+            <tr>
+                <td><label for="pwdRe">비번확인</label></td>
+                <td><input type="password" id="pwdRe" name="upwdRe"  required/></td>
+                <td></td>                        
+            </tr>
+            <tr>
+                <td> <label for="usernick">닉네임</label></td>
+                <td><input type="text" id="usernick" name="unick" required/></td>
+                <td><button class='jsNickDup'>중복확인</button></td>                        
+            </tr>
+            <tr>
+                <td> <label for="useremail">이메일</label></td>
+                <td>
+                    <input type="email" id="useremail" name="uemail" required/>
+                </td>
+                <td><button class='jsEmailDup'>인증받기</button></td>                        
+            </tr>
+        </tbody>
+    </table>
+
+<div>
+    <button class='jsRegBtn' type="submit">가입</button>
+    <button class='jsCancel'>취소</button>
+</div>
+</form>
