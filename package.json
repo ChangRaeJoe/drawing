@@ -4,9 +4,8 @@
   "description": "website as share platform, drawing, board etc.",
   "main": "main.js",
   "scripts": {
-    "start": "export NODE_ENV=development||set NODE_ENV=development&&node ./bin/www.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "production": "export NODE_ENV=production||set NODE_ENV=production&&node ./bin/www.js"
+    "start": "export NODE_ENV=production||set NODE_ENV=production&&node ./bin/www.js",
+    "test": "export NODE_ENV=development||set NODE_ENV=development&&node ./bin/www.js"
   },
   "repository": {
     "type": "git",

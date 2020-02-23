@@ -1,6 +1,5 @@
-db.js
 node_modules
 dist/*
 *.log
-db/*
+configs/**/
 ecosystem.config.js

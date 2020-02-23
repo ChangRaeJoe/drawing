@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const db_config = require('./db.js');     //db.js==dbTemplete.js
+const db_config = require('./db/db.json')[process.env.NODE_ENV];     //db.js==dbTemplete.js
 
 function dbWrapper()
 {

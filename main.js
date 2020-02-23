@@ -1,7 +1,7 @@
 var createError = require('http-errors')
 const http = require('http');
 const fs = require('fs')
-const dbconfig = require('./dbconfig'); 
+const dbconfig = require('./configs/dbconfig'); 
 const login = require('./lib/login');
 
 dbconfig.handleDisconnect();
