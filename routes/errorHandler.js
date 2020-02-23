@@ -1,13 +1,36 @@
-const express = require('express')
-const router = express.Router()
+const {logger, logStream} = require('../configs/winston')
 
-router.use(function(req, res, next) {
+const NotfoundHandler = function(req, res, next) {
     res.status(404).send('Sorry cant find that!');
-});
+}
 
-router.use(function(err, req, res, next) {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
+const errorHandler= function(err, req, res, next) {
+    if (process.env.NODE_ENV === 'production') {
+    const errObj = {
+      req: {
+        headers: req.headers,
+        query: req.query,
+        body: req.body,
+        route: req.route
+      },
+      error: {
+        message: err.message,
+        stack: err.stack,
+        status: err.status
+      },
+      user: req.user
+    }
 
-module.exports = router
+    logger.error(errObj)
+  } else {
+    //console 출력
+  }
+
+  return res.status(500).send('Something broke!');
+}
+
+
+module.exports = {
+    NotfoundHandler,
+    errorHandler
+}

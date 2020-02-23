@@ -1,3 +1,4 @@
+var createError = require('http-errors')
 const http = require('http');
 const fs = require('fs')
 const dbconfig = require('./dbconfig'); 
@@ -12,10 +13,24 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const compression = require('compression')
 
-const errRouter = require('./routes/errorHandler')
+const morgan = require('morgan');
+const {logger,logStream} = require('./configs/winston')
+
+const {NotfoundHandler, errorHandler} = require('./routes/errorHandler')
 
 app.set('views', './views')
 app.set('view engine', 'ejs');
+
+
+app.use((function(req, res, next){
+    if(process.env.NODE_ENV === 'production') {
+        return morgan("combined",{
+            stream: logStream
+        })
+    } else {
+        return morgan("dev")
+    }})()
+)
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -108,8 +123,8 @@ app.post('/ajax/redu/email', (request, response) => {
     login.postAjaxEmail(request, response,db);
 })
 
-
-app.use(errRouter)
+app.use(NotfoundHandler)
+app.use(errorHandler)
 module.exports = app
 
 
