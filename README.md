@@ -47,6 +47,8 @@ Callback 언제사용하는지, Callback모듈화는 어떤식으로 생성시�
 템플릿엔진, 생활코딩ajax
 https://eine.tistory.com/entry/Nodejs-Async-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-%EC%BD%9C%EB%B0%B1-%ED%95%A8%EC%88%98-%ED%92%80%EC%96%B4%EB%82%B4%EA%B8%B0
 https://coding-factory.tistory.com/143
+reversProxy: https://cinema4dr12.tistory.com/825?category=494869
+: https://m.blog.naver.com/azure0777/220469049820
 
 문서로 작성해서 정리하기.(위에거 프론트쪽임.)
 백엔드가 해야하는 일들, 어려운 일들->뭘해야하는지 알아보자.

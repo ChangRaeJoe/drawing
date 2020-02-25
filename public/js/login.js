@@ -167,7 +167,7 @@ function handleIdReduplication(event)
     //toDo: 유효성검사 in server
 
     //ajax json요청, 응답
-    makeRequest("POST", 'ajax/redu/id', data, jsonContents);
+    makeRequest("POST", '/login/redu/id', data, jsonContents);
 }
 function handleNcikReduplication(event)
 {
@@ -177,7 +177,7 @@ function handleNcikReduplication(event)
         nick: inputNick.value
     }
     //ajax json요청
-    makeRequest("POST", 'ajax/redu/nick', data, jsonContents)
+    makeRequest("POST", '/login/redu/nick', data, jsonContents)
 }
 function handleEmailReduplication(event)
 {
@@ -189,7 +189,7 @@ function handleEmailReduplication(event)
         email: inputEmail.value
     }
     //ajax json요청
-    makeRequest("POST", 'ajax/redu/email', data, jsonContents)
+    makeRequest("POST", '/login/redu/email', data, jsonContents)
 }
 
 

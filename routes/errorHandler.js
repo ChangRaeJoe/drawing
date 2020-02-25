@@ -26,6 +26,7 @@ const errorHandler= function(err, req, res, next) {
     //console 출력
   }
 
+  console.log(err)
   return res.status(500).send('Something broke!');
 }
 

@@ -2,7 +2,6 @@ var createError = require('http-errors')
 const http = require('http');
 const fs = require('fs')
 const dbconfig = require('./configs/dbconfig'); 
-const login = require('./lib/login');
 
 dbconfig.handleDisconnect();
 
@@ -17,6 +16,9 @@ const morgan = require('morgan');
 const {logger,logStream} = require('./configs/winston')
 
 const {NotfoundHandler, errorHandler} = require('./routes/errorHandler')
+const iboardRouter = require('./routes/board/img')
+const lboardRouter = require('./routes/board/list')
+const loginRouter = require('./routes/login/login')
 
 app.set('views', './views')
 app.set('view engine', 'ejs');
@@ -41,87 +43,28 @@ app.use(bodyParser.json())
 app.get('(/index.html|/)', (request, response) => {
     const params = {
         title: 'share Drawing', 
-        main: 'main1234',
+        main: 'main.ejs',
         aside: 'aside',
         cssList: ['style', 'mainLayout', 'loginRes'], 
         jsList: ['login']
     }
-    response.render('main', params)
+    response.render('index', params)
 })
 app.get('/about.html', (request, response) => {
     const params = {
         title: 'share Drawing-about', 
-        main: fs.readFileSync(__dirname + '/public/aboutMain.html'),
+        main: 'aboutMain.ejs',
         aside: 'aside',
         cssList: ['style', 'mainLayout', 'loginRes', 'about'], 
         jsList: ['login']
     }
-    response.render('main', params)
+    response.render('index', params)
 })
 
-app.get('/board.html', (request, response) => {
-    const params = {
-        title: 'share Drawing-Board', 
-        main: fs.readFileSync(__dirname + '/public/boardMain.html'),
-        aside: 'aside',
-        cssList: ['style', 'mainLayout', 'loginRes', 'talkBoard', 'board'], 
-        jsList: ['login']
-    }
-    response.render('main', params)
-})
-app.get('/update_board.html', (request, response) => {
-})
-app.get('/delete_board.html', (request, response) => {
-})
+app.use('/board', iboardRouter)
+app.use('/board',lboardRouter)
 
-
-app.get('/talk.html', (request, response) => {
-    const params = {
-        title: 'share Drawing-talkBoard', 
-        main: fs.readFileSync(__dirname + '/public/talkMain.html'),
-        aside: 'aside',
-        cssList: ['style', 'mainLayout', 'loginRes', 'talkBoard'], 
-        jsList: ['login']
-    }
-    response.render('main', params)
-})
-app.get('/update_talk.html', (request, response) => {
-
-})
-app.get('/delete_talk.html', (request, response) => {
-
-})
-
-app.get('/createDraw.html', (request, response) => {
-    const params = {
-        title: 'share Drawing-createDraw', 
-        main: fs.readFileSync(__dirname + '/public/createDrawMain.html'),
-        aside: 'aside',
-        cssList: ['style', 'mainLayout', 'loginRes'], 
-        jsList: ['canvasDraw', 'login']
-    }
-    response.render('main', params)
-})
-app.post('/login/register', (request, response) => {
-    const db = dbconfig.getConnect();
-    login.getRegister(request, response, db);
-})
-app.post('/login/login', (request, response) => {
-    const db = dbconfig.getConnect();
-    login.getLogin(request, response, db);
-})
-app.post('/ajax/redu/id', (request, response) => {
-    const db = dbconfig.getConnect();
-    login.postAjaxId(request, response, db);
-})
-app.post('/ajax/redu/nick', (request, response) => {
-    const db = dbconfig.getConnect();
-    login.postAjaxNick(request, response,db);
-})
-app.post('/ajax/redu/email', (request, response) => {
-    const db = dbconfig.getConnect();
-    login.postAjaxEmail(request, response,db);
-})
+app.use('/login', loginRouter(dbconfig))
 
 app.use(NotfoundHandler)
 app.use(errorHandler)
