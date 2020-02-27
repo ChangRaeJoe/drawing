@@ -20,15 +20,12 @@ router.get('/imgboard.html', (request, response) => {
         main: 'boardMain.ejs',
         aside: 'aside',
         cssList: ['style', 'mainLayout', 'loginRes', 'talkBoard', 'board'], 
-        jsList: ['login']
+        jsList: ['login', 'imgboard.paging'],
     }
     response.render('index', params)
 })
 router.get('/update_imgb.html', (request, response) => {
 })
-router.get('/delete_imgb.html', (request, response) => {
-})
-
 
 router.get('/createDraw.html', (request, response) => {
     const params = {

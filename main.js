@@ -1,6 +1,3 @@
-var createError = require('http-errors')
-const http = require('http');
-const fs = require('fs')
 const dbconfig = require('./configs/dbconfig'); 
 
 dbconfig.handleDisconnect();
@@ -20,6 +17,9 @@ const iboardRouter = require('./routes/board/img')
 const lboardRouter = require('./routes/board/list')
 const loginRouter = require('./routes/login/login')
 
+const iboardAPI = require('./api/board')
+const lboardAPI = require('./api/imgboard')
+
 app.set('views', './views')
 app.set('view engine', 'ejs');
 
@@ -38,6 +38,10 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 //session, cookie
+
+//api
+app.use('/api', iboardAPI(dbconfig))
+app.use('/api', lboardAPI(dbconfig))
 
 // routing
 app.get('(/index.html|/)', (request, response) => {
@@ -65,6 +69,7 @@ app.use('/board', iboardRouter)
 app.use('/board',lboardRouter)
 
 app.use('/login', loginRouter(dbconfig))
+
 
 app.use(NotfoundHandler)
 app.use(errorHandler)

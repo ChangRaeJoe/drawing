@@ -1,0 +1,13 @@
+<% boardList.forEach((row) => {%>
+    <div class='boxSize'>
+        <div class="imgLimit">
+            <a href="/api/imgboard/<%- row.id%>">
+                <img class='imgConfig'src="/img/aboutImg.jpg" alt="">
+            </a>
+        </div>
+        <div class="widthFull">태그</div>
+        <div class="widthFull">조회수 <%- row.hit %></div>
+    
+        <div class="widthFull">작성자 <%- row.user_id %></div>
+    </div>
+<% }) %>
