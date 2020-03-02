@@ -11,15 +11,12 @@
             </ul>
         </nav>  
     </div>
-    <div class="fixedHead under">
-        <form action="/login/login" method="post" onSubmit="return loginValidation()">
-            <input type="text" placeholder="id" name="loginId" class="loginId"/>
-            <input type="password" placeholder="password" name="loginPwd" class="loginPwd"/>
-            
-            <button type="submit" class="loginBtn" >Login</button>
-            <button class="loginBtn" id='jsSignUp'>Sign Up</button>
-        </form>
-    </div>
+    
+    <% if(loggined !== undefined){ %>
+        <%- include('../template/LoginOk'); %>
+    <% } else {  %>
+         <%- include('../template/LoginNot'); %>
+    <% } %>
     
     <section class='content'>
         

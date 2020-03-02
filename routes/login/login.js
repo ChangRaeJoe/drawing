@@ -2,14 +2,19 @@ const expree = require('express')
 const router = expree.Router()
 const login = require('../../lib/login')
 
-module.exports = function(dbconfig){
+module.exports = function(dbconfig, passport){
     router.post('/register', (request, response) => {
         const db = dbconfig.getConnect();
         login.getRegister(request, response, db);
     })
-    router.post('/login', (request, response) => {
-        const db = dbconfig.getConnect();
-        login.getLogin(request, response, db);
+    // router.post('/login', (request, response) => {
+    //     const db = dbconfig.getConnect();
+    //     login.getLogin(request, response, db);
+    // })
+    router.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/' }));
+    router.get('/logout', function(req, res) {
+        req.logOut()
+        res.redirect('/')
     })
     router.post('/redu/id', (request, response) => {
         const db = dbconfig.getConnect();

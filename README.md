@@ -14,6 +14,7 @@ using library:
 
 ## toDo
 - DB -> DB connection pool
+- passport, redis, log refactoring
 
 ## toDo2
     세션,

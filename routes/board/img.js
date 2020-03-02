@@ -21,6 +21,7 @@ router.get('/imgboard.html', (request, response) => {
         aside: 'aside',
         cssList: ['style', 'mainLayout', 'loginRes', 'talkBoard', 'board'], 
         jsList: ['login', 'imgboard.paging'],
+        loggined: request.loggined
     }
     response.render('index', params)
 })
@@ -33,7 +34,8 @@ router.get('/createDraw.html', (request, response) => {
         main: 'createDrawMain.ejs',
         aside: 'aside',
         cssList: ['style', 'mainLayout', 'loginRes'], 
-        jsList: ['canvasDraw', 'login']
+        jsList: ['canvasDraw', 'login'],
+        loggined: request.loggined
     }
     response.render('index', params)
 })

@@ -38,6 +38,8 @@ module.exports = function(dbconfig) {
             aside: 'aside',
             cssList: ['style', 'mainLayout', 'loginRes', 'talkBoard', 'board'], 
             jsList: ['login'],
+            loggined: req.loggined
+
         }
         const db = dbconfig.getConnect();
         db.query('SELECT * FROM ImgBoard WHERE id=?;', [numId], function(err, result) {
@@ -50,16 +52,35 @@ module.exports = function(dbconfig) {
 
     // /api/imgboard    session_id확인 body: {title, description, auther_id, imgFile}
     router.post('/imgboard', function(req, res, next) {
-
+        // body: {title, context, imgp}, imgpath와 세션id의 유저id가져오기
+        
     })
 
     // /api/imgboard/:number    session_id확인 body: {title, description, imgFile}
     router.put('/imgboard/:num', function(req, res, next) {
+        // num확인 - body(title, context, img/path)확인 - user_id와 접속유저id확인 - 완료
 
     })
 
     // /api/imgboard/:number    session_id확인
     router.delete('/imgboard/:num', function(req, res, next) {
+        //num을 찾고 아이디일치확인하고 제거
+        const numId = parseInt(req.params.num, 10)
+        if(Number.isNaN(numId)) {
+            res.status(400).send()
+        }
+
+        const db = dbconfig.getConnect();
+        db.query(`SELECT id, user_id FROM ImgBoard WHERE id=?`, [numId], function(err, result) {
+            //게시글유저id === 접속유저id
+
+        })
+        
+        
+        db.query(`DELETE FROM ImgBoard WHERE id=?`, [numId, ], function(err, result) {
+            if(err) throw err
+            else return res.status(204).send()
+        })
 
     })
     return router

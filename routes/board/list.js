@@ -8,7 +8,8 @@ router.get('/listboard.html', (request, response) => {
         main: 'boardMain.ejs',
         aside: 'aside',
         cssList: ['style', 'mainLayout', 'loginRes', 'talkBoard'], 
-        jsList: ['login']
+        jsList: ['login'],
+        loggined: request.loggined
     }
     response.render('index', params)
 })
