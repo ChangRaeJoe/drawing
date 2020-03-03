@@ -9,6 +9,7 @@ const bodyParser = require('body-parser')
 const redis = require('redis')
 const session = require('express-session')
 const compression = require('compression')
+var expressLayouts = require('express-ejs-layouts');
 
 const morgan = require('morgan');
 const {logger,logStream} = require('./configs/winston')
@@ -24,6 +25,10 @@ const lboardAPI = require('./api/imgboard')
 
 app.set('views', './views')
 app.set('view engine', 'ejs');
+app.set('layout', 'layout');
+app.set("layout extractScripts", true)
+app.set("layout extractStyles", true)
+app.use(expressLayouts);
 
 
 app.use((function(req, res, next){
@@ -59,9 +64,9 @@ auth.initLocal()
 app.use(function(req, res, next) {
     console.log('main:', req.user)
     if(req.user !== undefined) {
-        req.loggined = req.user.nick
+        res.locals.loggined = true
     } else {
-        req.loggined = undefined
+        res.locals.loggined = false
     }
     next()
 })
@@ -71,26 +76,11 @@ app.use('/api', lboardAPI(dbconfig))
 
 // routing
 app.get('(/index.html|/)', (request, response) => {
-    const params = {
-        title: 'share Drawing', 
-        main: 'main.ejs',
-        aside: 'aside',
-        cssList: ['style', 'mainLayout', 'loginRes'], 
-        jsList: ['login'],
-        loggined: request.loggined
-    }
-    response.render('index', params)
+    response.render('template/index.ejs')
 })
 app.get('/about.html', (request, response) => {
-    const params = {
-        title: 'share Drawing-about', 
-        main: 'aboutMain.ejs',
-        aside: 'aside',
-        cssList: ['style', 'mainLayout', 'loginRes', 'about'], 
-        jsList: ['login'],
-        loggined: request.loggined
-    }
-    response.render('index', params)
+
+    response.render('template/about.ejs')
 })
 
 app.use('/board', iboardRouter)

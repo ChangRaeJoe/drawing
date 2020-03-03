@@ -19,9 +19,10 @@ module.exports = function(dbconfig) {
         db.query('SELECT id, title, user_id, hit, imgpath, date FROM ImgBoard LIMIT ? OFFSET ?;', [limit, offset], function(err, result) {
             if(err) throw err
             const params = {
-                boardList: result
+                layout: 'iboardLayout.ejs',
+                boardList: result,
             }
-            return res.render('template/imgboardList', params)
+            return res.render('iboardLayout', params)
         })  
     })
 
@@ -31,21 +32,11 @@ module.exports = function(dbconfig) {
         if(Number.isNaN(numId)) {
             return res.status(400).send()
         }
-        
-        const params = {
-            title: 'share Drawing-Board', 
-            main: 'viewImgBoard.ejs',
-            aside: 'aside',
-            cssList: ['style', 'mainLayout', 'loginRes', 'talkBoard', 'board'], 
-            jsList: ['login'],
-            loggined: req.loggined
-
-        }
         const db = dbconfig.getConnect();
         db.query('SELECT * FROM ImgBoard WHERE id=?;', [numId], function(err, result) {
             if(err) throw err
-            params.showBoard = result[0]
-            return res.render('index', params)
+            const showBoard = result[0]
+            return res.render('template/iboard.view.ejs', showBoard)
         })  
         
     })

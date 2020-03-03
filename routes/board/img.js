@@ -15,29 +15,13 @@ const fs = require('fs')
     3. 클라이언트는 객체를 html로 렌더링해서 보여준다.
 */
 router.get('/imgboard.html', (request, response) => {
-    const params = {
-        title: 'share Drawing-Board', 
-        main: 'boardMain.ejs',
-        aside: 'aside',
-        cssList: ['style', 'mainLayout', 'loginRes', 'talkBoard', 'board'], 
-        jsList: ['login', 'imgboard.paging'],
-        loggined: request.loggined
-    }
-    response.render('index', params)
+    response.render('template/iboard.ejs')
 })
 router.get('/update_imgb.html', (request, response) => {
 })
 
 router.get('/createDraw.html', (request, response) => {
-    const params = {
-        title: 'share Drawing-createDraw', 
-        main: 'createDrawMain.ejs',
-        aside: 'aside',
-        cssList: ['style', 'mainLayout', 'loginRes'], 
-        jsList: ['canvasDraw', 'login'],
-        loggined: request.loggined
-    }
-    response.render('index', params)
+    response.render('template/iboard.create.ejs')
 })
 
 module.exports = router

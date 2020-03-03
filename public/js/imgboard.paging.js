@@ -16,7 +16,6 @@
                 // const data = JSON.parse(httpRequest.responseText);
                 
                 boardContainer.innerHTML = httpRequest.responseText
-                console.log(httpRequest.responseText)
 
               } else {
                 alert('There was a problem with the request.');

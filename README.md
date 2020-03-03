@@ -14,7 +14,8 @@ using library:
 
 ## toDo
 - DB -> DB connection pool
-- passport, redis, log refactoring
+- passport, redis, log code refactoring
+- chatting, 영화크롤링, 알고리즘문제, 기본공부, toy프로젝트(저녁), 문서정리, 목표세워서 이뤄나가자.(작은 프로젝트, 행동들)
 
 ## toDo2
     세션,
