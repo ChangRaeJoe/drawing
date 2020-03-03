@@ -26,9 +26,9 @@
         </div>
         
         <% if(loggined === true){ %>
-            <%- include('template/login/LoginOk'); %>
+            <%- include('../login/LoginOk'); %>
         <% } else {  %>
-             <%- include('template/login/LoginNot'); %>
+             <%- include('../login/LoginNot'); %>
         <% } %>
         
         <section class='content'>
@@ -48,7 +48,7 @@
         <div class='backSignUp'></div>
         <div class="signUp">
         ${registerScreen()}
-        <%- include('template/login/login'); %>
+        <%- include('../login/login'); %>
             <div class='oAuth'>
                 <hr>
                 OAuth2.0
@@ -61,10 +61,9 @@
 </html>
 
 <!-- 
-ejs 구조개선
-https://github.com/Soarez/express-ejs-layouts
-https://hyc7575.github.io/2017/05/18/2017-05-18-express-ejs/
 폴더구조개선
 https://junspapa-itdev.tistory.com/7?category=781922
+
+view-routes 1:1구조로 개선
 
  -->

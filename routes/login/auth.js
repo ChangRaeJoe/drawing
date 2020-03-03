@@ -1,7 +1,7 @@
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
-const login = require('../../lib/login')
+const login = require('./signin')
 
 module.exports = {
     passport:passport,

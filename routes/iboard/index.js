@@ -15,13 +15,13 @@ const fs = require('fs')
     3. 클라이언트는 객체를 html로 렌더링해서 보여준다.
 */
 router.get('/imgboard.html', (request, response) => {
-    response.render('template/iboard.ejs')
+    response.render('iboard/iboard.ejs')
 })
 router.get('/update_imgb.html', (request, response) => {
 })
 
 router.get('/createDraw.html', (request, response) => {
-    response.render('template/iboard.create.ejs')
+    response.render('iboard/iboard.create.ejs')
 })
 
 module.exports = router

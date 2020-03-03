@@ -15,8 +15,8 @@ const morgan = require('morgan');
 const {logger,logStream} = require('./configs/winston')
 
 const {NotfoundHandler, errorHandler} = require('./routes/errorHandler')
-const iboardRouter = require('./routes/board/img')
-const lboardRouter = require('./routes/board/list')
+const iboardRouter = require('./routes/iboard')
+const lboardRouter = require('./routes/talkboard')
 const loginRouter = require('./routes/login/login')
 const auth = require('./routes/login/auth')
 
@@ -25,7 +25,7 @@ const lboardAPI = require('./api/imgboard')
 
 app.set('views', './views')
 app.set('view engine', 'ejs');
-app.set('layout', 'layout');
+app.set('layout', 'layout/layout');
 app.set("layout extractScripts", true)
 app.set("layout extractStyles", true)
 app.use(expressLayouts);

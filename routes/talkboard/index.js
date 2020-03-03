@@ -3,7 +3,7 @@ const router = express.Router()
 const fs = require('fs')
 
 router.get('/listboard.html', (request, response) => {
-    response.render('template/talkboard.ejs')
+    response.render('talkboard/talkboard.ejs')
 })
 router.get('/update_list.html', (request, response) => {
 

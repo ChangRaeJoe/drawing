@@ -19,10 +19,10 @@ module.exports = function(dbconfig) {
         db.query('SELECT id, title, user_id, hit, imgpath, date FROM ImgBoard LIMIT ? OFFSET ?;', [limit, offset], function(err, result) {
             if(err) throw err
             const params = {
-                layout: 'iboardLayout.ejs',
+                layout: 'layout/iboardLayout.ejs',
                 boardList: result,
             }
-            return res.render('iboardLayout', params)
+            return res.render('layout/iboardLayout', params)
         })  
     })
 
@@ -36,7 +36,7 @@ module.exports = function(dbconfig) {
         db.query('SELECT * FROM ImgBoard WHERE id=?;', [numId], function(err, result) {
             if(err) throw err
             const showBoard = result[0]
-            return res.render('template/iboard.view.ejs', showBoard)
+            return res.render('iboard/iboard.view.ejs', showBoard)
         })  
         
     })
