@@ -4,7 +4,7 @@
 //boardcontainer.innerHTML에 추가
 //종료
 
-(function() {
+function pageRequest(page=0) {
     const boardContainer = document.querySelector('.boardContainer')
     let httpRequest;
 
@@ -14,7 +14,6 @@
             if (httpRequest.readyState === XMLHttpRequest.DONE) {
               if (httpRequest.status === 200) {
                 // const data = JSON.parse(httpRequest.responseText);
-                
                 boardContainer.innerHTML = httpRequest.responseText
 
               } else {
@@ -41,10 +40,26 @@
     }
     
     
-    function initpage(offset=0)
+    function initpage(page)
     {
         //ajax json요청, 응답
-        makeRequest("GET", `/api/imgboard?offset=${offset}`, receiveList);
+        makeRequest("GET", `/api/imgboard?page=${page}`, receiveList);
     }
-    initpage()
-})()
+    initpage(page)
+}
+
+
+// paging
+// 번호 버튼클릭 시 이벤트발생
+const pageBtns = document.querySelectorAll('.btnMaginSide')
+
+function handlerPage(event) {
+  pageRequest(event.target.innerText)
+}
+
+pageBtns.forEach(val => {
+  val.addEventListener('click', handlerPage)
+  
+})
+
+pageRequest(pageBtns[0].innerText)

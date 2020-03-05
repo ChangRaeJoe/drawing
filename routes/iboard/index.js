@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const fs = require('fs')
 
+const paging = require('./paging')
 /*
     toDo: board
     - board db schema create
@@ -14,10 +15,13 @@ const fs = require('fs')
     2. 클라이언트로 json객체를 응답한다.
     3. 클라이언트는 객체를 html로 렌더링해서 보여준다.
 */
+
 router.get('/imgboard.html', (request, response) => {
-    response.render('iboard/iboard.ejs')
+    paging.getVals(request, response)
 })
+
 router.get('/update_imgb.html', (request, response) => {
+    response.render('iboard/iboard.update.ejs')
 })
 
 router.get('/createDraw.html', (request, response) => {

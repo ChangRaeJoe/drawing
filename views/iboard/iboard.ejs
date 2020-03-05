@@ -1,18 +1,31 @@
 <!-- body -->
-<div class='boardContainer'>
+<div class='boardContainer boxing'>
     <!-- list add -->
 </div>
 <div class="boardContainer">
     <div class="btnRight btnMagin">
-        <button>
-        글쓰기
-    </button></div>
+        <button onClick="location.href='/board/createDraw.html'">
+            Write
+        </button>
+    </div>
     <div class="page btnCenter">
-        <button class="btnMaginSide">1</button>
-        <button class="btnMaginSide">1</button>
-        <button class="btnMaginSide">1</button>
-        <button class="btnMaginSide">1</button>
-        <button class="btnMaginSide">1</button>
+        <% if(active['prev']) { %>
+            <div><a href="/board/imgboard.html?page=<%= frontPage-PAGE_SIZE %>">prev</a></div>
+        <% } else { %>
+            <div>prev</div>
+        <% } %>
+
+        <% for(let i=frontPage; i<=lastPage; i++) { %>
+            <button class="btnMaginSide" >
+                <%- i %>
+            </button>
+        <% } %>
+
+        <% if(active['next']) { %>
+            <div><a href="/board/imgboard.html?page=<%= lastPage+1 %>">next</a></div>
+        <% } else { %>
+            <div>next</div>
+        <% } %>
     </div>
 
 </div>

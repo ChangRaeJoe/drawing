@@ -1,22 +1,22 @@
 const exprees = require('express')
 const router = exprees.Router()
 const bControl = require('./imgboard.control')
-
+const {W_SIZE} = require('../../routes/iboard/paging')
 
 module.exports = function(dbconfig) {
         
-    //route pahth: /api/imgboard?offset=
+    //route pahth: /api/imgboard?page=
     router.get('/imgboard', function(req, res,next) {
-        const post = req.query.offset
-        const offset = parseInt(post)
-        const limit = 10
-        if(Number.isNaN(offset)) {
+        const post = req.query.page
+        const page = parseInt(post)
+        const limit = W_SIZE
+        if(Number.isNaN(page)) {
             return res.status(400).send()
         }
 
         //db로부터 게시판조회 - 렌더링 - 전송
         const db = dbconfig.getConnect();
-        db.query('SELECT id, title, user_id, hit, imgpath, date FROM ImgBoard LIMIT ? OFFSET ?;', [limit, offset], function(err, result) {
+        db.query('SELECT id, title, user_id, hit, imgpath, date FROM ImgBoard LIMIT ? OFFSET ?;', [limit, (page-1)*limit], function(err, result) {
             if(err) throw err
             const params = {
                 layout: 'layout/iboardLayout.ejs',
