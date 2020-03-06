@@ -44,7 +44,16 @@ module.exports = function(dbconfig) {
     // /api/imgboard    session_id확인 body: {title, description, auther_id, imgFile}
     router.post('/imgboard', function(req, res, next) {
         // body: {title, context, imgp}, imgpath와 세션id의 유저id가져오기
-        
+        if(req.user === undefined) {
+            return res.status(400).send()
+        }
+        const post = req.body
+        const imgpath = base64ToAscii(post.img)
+        db.query(`INSERT INTO imgboard VALUES(?, ?, ?, 0, ?, NOW())`,[post.title, post.content, req.user.id, imgpath], function(err, result) {
+            //완료 콘솔출력
+            if(err) throw err;
+            console.log('1 record insert')
+        })
     })
 
     // /api/imgboard/:number    session_id확인 body: {title, description, imgFile}

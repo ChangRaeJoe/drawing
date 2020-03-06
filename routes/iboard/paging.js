@@ -13,8 +13,6 @@ async function getVals(request, response) {
         return response.status(400).send()
     }
 
-
-    
     function numOfPage() {
         const query = `SELECT COUNT(*) as cnt FROM Imgboard`
         return promisifyDB(query).then((results) => {
