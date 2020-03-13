@@ -33,6 +33,7 @@
     "passport-local": "^1.0.0",
     "pbkdf2-password": "^1.2.1",
     "redis": "^3.0.2",
+    "unique-filename": "^1.1.1",
     "winston": "^3.2.1"
   },
   "devDependencies": {}

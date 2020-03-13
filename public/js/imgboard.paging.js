@@ -15,7 +15,6 @@ function pageRequest(page=0) {
               if (httpRequest.status === 200) {
                 // const data = JSON.parse(httpRequest.responseText);
                 boardContainer.innerHTML = httpRequest.responseText
-
               } else {
                 alert('There was a problem with the request.');
               }

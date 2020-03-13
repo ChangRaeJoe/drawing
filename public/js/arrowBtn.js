@@ -66,3 +66,5 @@ document.getElementById('btn-next').addEventListener('click', function(){ nextPr
 
 let currentTab = 0
 showTab(currentTab)
+
+//arrowBtn을 create와 update사용가능하도록 분리시키기.

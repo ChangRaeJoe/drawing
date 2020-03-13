@@ -3,6 +3,7 @@ const router = express.Router()
 const fs = require('fs')
 
 const paging = require('./paging')
+const {update} = require('./update')
 /*
     toDo: board
     - board db schema create
@@ -20,8 +21,8 @@ router.get('/imgboard.html', (request, response) => {
     paging.getVals(request, response)
 })
 
-router.get('/update_imgb.html', (request, response) => {
-    response.render('iboard/iboard.update.ejs')
+router.get('/imgboard/:number/update', (request, response) => {
+    update(request, response)
 })
 
 router.get('/createDraw.html', (request, response) => {
