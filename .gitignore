@@ -1,4 +1,6 @@
-db.js
 node_modules
 dist/*
 *.log
+configs/**/
+ecosystem.config.js
+public/img/*

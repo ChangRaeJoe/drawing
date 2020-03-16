@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title><%- title %></title>
+
+    <%- style %>
+</head>
+<body>
+    <!-- body -->
+    <div class="container">
+        <div class="content fixedHead">
+            <header>
+                <a class='link' href='/index.html'>Drawing</a>
+            </header>
+            <nav>
+                <ul>
+                    <li><a href="/about.html" class="link">About</a></li>
+                    <li><a href="/board/imgboard.html" class="link">Board</a></li>
+                </ul>
+            </nav>  
+        </div>
+        
+        <% if(loggined === true){ %>
+            <%- include('../login/LoginOk'); %>
+        <% } else {  %>
+             <%- include('../login/LoginNot'); %>
+        <% } %>
+        
+        <section class='content'>
+            
+            <main> <%- body %></main>
+            <aside><%- aside %></aside>
+        </section>
+    
+        
+        <footer>
+            Inquire : ckdfo1995@gmail.com
+        </footer>
+    </div>
+    
+    <!-- login -->
+    <div class="displayRegister displayRegisterOff">
+        <div class='backSignUp'></div>
+        <div class="signUp">
+        ${registerScreen()}
+        <%- include('../login/login'); %>
+            <div class='oAuth'>
+                <hr>
+                OAuth2.0
+            </div>
+        </div>
+    </div>  
+
+    <%- script %>
+</body>
+</html>

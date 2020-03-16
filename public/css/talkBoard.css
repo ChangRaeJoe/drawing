@@ -25,7 +25,9 @@ h2{
     margin:auto;
 }
 .btnMagin{
-    margin-top: 5px;
+    width: 100%;
+    margin-top: 10px;
+    margin-right: 10%;
 }
 .btnMaginSide{
     margin: 0 2px;
@@ -39,3 +41,4 @@ h2{
     padding-bottom: 4px;
     font-weight: 700;
 }
+

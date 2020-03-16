@@ -38,6 +38,12 @@ function initCanvas(){
     
     ctx.strokeStyle = INIT_COLOR;
     ctx.fillStyle = INIT_COLOR;
+
+    //for update
+    const img = document.querySelector('.loadedImg')
+    if(img) {
+        ctx.drawImage(img, 0, 0)
+    }
 }
 
 function startBrushing(){
