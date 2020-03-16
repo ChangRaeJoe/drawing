@@ -22,7 +22,7 @@ module.exports = function() {
         }
 
         //db로부터 게시판조회 - 렌더링 - 전송
-        db.query('SELECT id, title, user_id, hit, imgpath, date FROM ImgBoard LIMIT ? OFFSET ?;', [limit, (page-1)*limit])
+        db.query('SELECT id, title, user_id, hit, imgpath, date FROM ImgBoard ORDER BY id DESC LIMIT ? OFFSET ?;', [limit, (page-1)*limit])
         .then(([results, fiedls])=>{
             const params = {
                 layout: 'layout/iboardLayout.ejs',
@@ -105,7 +105,7 @@ module.exports = function() {
             
             // rowdb의 user_id와 세션id비교
             if(row.user_id !== req.user.id) {
-                throw('noop')
+                throw('User Access diff')
             }
             // 받은 데이터를 db에 수정
             const queryDB = db.query(`UPDATE ImgBoard SET title = ?,context=? WHERE id = ?`, 
@@ -146,7 +146,7 @@ module.exports = function() {
         .then(([ results]) =>{
             const row = results[0]
             if(row.user_id !== req.user.id) {
-                throw('noop')
+                throw('User Access diff')
             }
             
             return db.query(`DELETE FROM ImgBoard WHERE id=?`, [numId])

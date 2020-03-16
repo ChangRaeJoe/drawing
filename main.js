@@ -16,11 +16,9 @@ const {logger,logStream} = require('./configs/winston')
 
 const {NotfoundHandler, errorHandler} = require('./routes/errorHandler')
 const iboardRouter = require('./routes/iboard')
-const lboardRouter = require('./routes/talkboard')
 const loginRouter = require('./routes/login/login')
 const auth = require('./routes/login/auth')
 
-const iboardAPI = require('./api/board')
 const lboardAPI = require('./api/imgboard')
 
 app.set('views', './views')
@@ -42,7 +40,7 @@ app.use((function(req, res, next){
 )
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ limit: "10mb",extended: false }))
 app.use(bodyParser.json())
 
 //session, cookie
@@ -71,7 +69,6 @@ app.use(function(req, res, next) {
     next()
 })
 // api
-app.use('/api', iboardAPI(dbconfig))
 app.use('/api', lboardAPI(dbconfig))
 
 // routing
@@ -84,7 +81,6 @@ app.get('/about.html', (request, response) => {
 })
 
 app.use('/board', iboardRouter)
-app.use('/board',lboardRouter)
 
 app.use('/login', loginRouter(dbconfig, auth.passport))
 
