@@ -5,16 +5,7 @@ const valid = require('../../lib/validRouter')
 function pageUpdate() {
     
     function getPageData(pageId) {
-        return new Promise((resolve, reject) =>{
-            db.query(`SELECT * FROM ImgBoard WHERE id=?`, [pageId], function(err, results){
-                if(err) throw err
-                if(results.length < 1) {
-                    reject('db-results-undefined')
-                } else {
-                    resolve(results[0])
-                }
-            })
-        })
+        return db.query(`SELECT * FROM ImgBoard WHERE id=?`, [pageId])
     }
     
     function update(req, res) {
@@ -25,9 +16,13 @@ function pageUpdate() {
         .then(pageId => {
             return getPageData(parseInt(req.params.number, 10))
         })
-        .then(result =>{
+        .then(([results, fiedls]) =>{
+            if(results.length < 1) {
+                throw'db-results-undefined'
+            } else {
+                res.render('iboard/iboard.update.ejs', results[0])
+            }
             
-            res.render('iboard/iboard.update.ejs', result)
         })
         .catch(reason =>{
             console.log('err:', reason)

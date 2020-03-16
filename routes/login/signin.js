@@ -4,9 +4,11 @@ const hasher = bkfd2Password();
 const dbcofig = require('../../configs/dbconfig')
 const db = dbcofig.getConnect()
 
+
+
 exports.getLogin = function(username, password, done){
-    db.query('SELECT * FROM User WHERE id=?', [username], function(error, results, fields){
-        if (error) throw error;
+    db.query('SELECT * FROM User WHERE id=?', [username])
+    .then(([results, fields]) =>{
         if(results.length === 0)
         {
             //불일치 alert뜨게 하기;
@@ -28,5 +30,8 @@ exports.getLogin = function(username, password, done){
             });
             
         }
-    });
+    })
+    .catch(error =>{
+        console.error(error)
+    })
 }

@@ -16,8 +16,8 @@ exports.getRegister = function(request,response){
         const sql = `INSERT INTO User
                     VALUES (?, ?, ?, ?, NOW(), ?);`;
         const value = [post.uid, hash, post.unick, post.uemail, salt];
-        db.query(sql, value, function(err, result){
-            if(err) throw err;
+        db.query(sql, value)
+        .then(([results, fields]) =>{
             console.log('insert DB: 1 record inserted');
 
             //리다이렉트, ux(성공메시지)
@@ -29,8 +29,11 @@ exports.getRegister = function(request,response){
             response.write(jsAlert);
             response.write(refresh);
             response.end();
-        });
+        })
+        .catch(error =>{
+            throw err
+        })
         
-        });
+    });
 
 }

@@ -14,14 +14,17 @@ exports.postAjaxId = function(request, response)
         type:"id",
         reduplication: false
     }
-    db.query(`SELECT id FROM User WHERE id=?`,[post.id], function(err, result, fields){
-        if (err) throw err;
-        if(result.length >=1)
+    db.query(`SELECT id FROM User WHERE id=?`,[post.id])
+    .then(([results, fields]) =>{
+        if(results.length >=1)
         {
             sendData.reduplication = true;
         }
         response.json(sendData)
-    });
+    })
+    .catch((err) =>{
+        throw err
+    })
 
 }
 
@@ -36,14 +39,21 @@ exports.postAjaxNick = function(request, response)
         type: "nick",
         reduplication: false
     }
-    db.query(`SELECT id FROM User WHERE nick=?`,[post.nick],function(err, result, fields){
-        if (err) throw err;
-        if(result.length >=1)
+    if(post.nick.length === 0) {
+        sendData.reduplication = true
+        return response.json(sendData)
+    }
+    db.query(`SELECT id FROM User WHERE nick=?`,[post.nick])
+    .then(([results, fiedls])=>{
+        if(results.length >=1)
         {
             sendData.reduplication = true;
         }
         response.json(sendData)
-    });
+    })
+    .catch(err =>{
+        throw err
+    })
 }
 
 exports.postAjaxEmail = function(request, response)
@@ -57,11 +67,14 @@ exports.postAjaxEmail = function(request, response)
         type: "email",
         reduplication: false
     }
-    db.query(`SELECT id FROM User WHERE email=?`,[post.email], function(err, result, fields){
-        if (err) throw err;
-        if(result.length >=1) {
+    db.query(`SELECT id FROM User WHERE email=?`,[post.email])
+    .then(([results, fiedls])=>{
+        if(results.length >=1) {
             sendData.reduplication = true;
         }
         response.json(sendData)
-    });
+    })
+    .catch(err =>{
+        throw err
+    })
 }

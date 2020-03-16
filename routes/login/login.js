@@ -5,8 +5,7 @@ const validation = require('./validation')
 
 module.exports = function(dbconfig, passport){
     router.post('/register', (request, response) => {
-        const db = dbconfig.getConnect();
-        signup.getRegister(request, response, db);
+        signup.getRegister(request, response, );
     })
     
     router.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/' }));
@@ -15,16 +14,13 @@ module.exports = function(dbconfig, passport){
         res.redirect('/')
     })
     router.post('/redu/id', (request, response) => {
-        const db = dbconfig.getConnect();
-        validation.postAjaxId(request, response, db);
+        validation.postAjaxId(request, response);
     })
     router.post('/redu/nick', (request, response) => {
-        const db = dbconfig.getConnect();
-        validation.postAjaxNick(request, response,db);
+        validation.postAjaxNick(request, response);
     })
     router.post('/redu/email', (request, response) => {
-        const db = dbconfig.getConnect();
-        validation.postAjaxEmail(request, response,db);
+        validation.postAjaxEmail(request, response);
     })
     return router
 }
